@@ -3,66 +3,93 @@
 #include "Vehicle.h"
 using namespace std;
 template <typename v>
-void garage<v>::add(char* s1, char* s2, char* s3, char* s4, char* s5)
+void garage<v>::add(v* ob)
 {
 
-	v* p = list;
-	list = new v(s1, s2, s3, s4, s5);
-	list->setNext(p);
-
+	place<v>* new_place = new place<v>(ob);
+	new_place->next = head;
+	new_place->prev = nullptr;
+	head->prev = new_place;
+	head = new_place;
 	amount++;
 }
 template <typename v>
 void garage<v>::del(int num)
 {
-	v* p;
-	v* delP = nullptr;
+	place<v>* p;
 	if (num > amount)
 	{
 		return;
 	}
 	num--;
-	p = list;
+	p = head;
 	while (num > 0)
 	{
-		p = p->getNext();
+		p = p->next;
 		num--;
 	}
-	delP = p->getNext();
-	p->setNext(delP->getNext());
-	delete delP;
-
+	if (p->prev)
+	{
+		p->prev->next = p->next;
+	}
+	else
+	{
+		head = head->next;
+	}
+	if (p->next)
+	{
+		p->next->prev = p->prev;
+	}
+	else
+	{
+		tail = tail->prev;
+	}
+	delete p;
 	amount--;
 }
 template <typename v>
-void garage<v>::changeData(int num)
+vehicle* garage<v>::getEl(int num)
 {
-
+	place<v>* p;
+	if (num > amount)
+	{
+		return nullptr;
+	}
+	num--;
+	p = head;
+	while (num > 0)
+	{
+		p = p->next;
+		num--;
+	}
+	return p->vehicle;
 }
 template <typename v>
 void garage<v>::show(void)
 {
-	v* p = list;
-	while (p->getNext() != nullptr)
+	place<v>* p = head;
+	while (p->next != nullptr)
 	{
-		p->show();
-		p = p->getNext();
+		p->vehicle->show();
+		p = p->next;
 	}
 }
 template <typename v>
 garage<v>::garage()
 {
-	list = new v;
+	head = tail = new place<v>;
+	tail->next = nullptr;
+	head->prev = nullptr;
 	amount = 0;
 }
 template <typename v>
 garage<v>::~garage()
 {
-	v* p = list;
+	place<v>* p = head;
 	while (p != nullptr)
 	{
-		p = p->getNext();
-		delete list;
-		list = p;
+		p = p->next;
+		delete head;
+		head = p;
 	}
 }

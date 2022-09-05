@@ -1,4 +1,6 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Motorcycle.h"
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -13,9 +15,8 @@ void motorcycle::show(void)
 motorcycle::motorcycle(void)
 {
 	mark = model = engV = engCap = terrain = nullptr;
-	next = nullptr;
 }
-motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engV(s3),engCap(s4),terrain(s5),next(0){}
+motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engV(s3),engCap(s4),terrain(s5){}
 /*
 {
 	mark = s1;
@@ -51,14 +52,18 @@ motorcycle::~motorcycle(void)
 }
 void motorcycle::change(void)
 {
-
+	char* s = new char[20];
+	int chanField;
+	cout << "Enter number of changing data about vehicle: 1-mark." << endl;
+	cin >> chanField;
+	switch (chanField)
+	{
+	case 1:
+		cout << "Enter new mark: " << endl;
+		cin >> s;
+		strcpy(mark, s);
+		break;
+	}
+	delete[] s;
 }
 
-motorcycle* motorcycle::getNext(void)
-{
-	return next;
-}
-void motorcycle::setNext(motorcycle* p)
-{
-	next = p;
-}

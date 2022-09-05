@@ -142,10 +142,12 @@
     <ClCompile Include="Garage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motorcycle.cpp" />
+    <ClCompile Include="Place.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Garage.h" />
     <ClInclude Include="Motorcycle.h" />
+    <ClInclude Include="Place.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

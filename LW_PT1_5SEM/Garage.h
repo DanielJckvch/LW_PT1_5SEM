@@ -10,10 +10,13 @@ private:
 	place<v>* tail;
 	int amount;
 public:
-	void add(v* ob);
+	void add(v ob);
 	void del(int num);
 	vehicle* getEl(int num);
 	void show(void);
 	garage();
+	garage(v* ob);
+	garage(const garage<v>& ob);
 	~garage();
+	garage operator++(int notused);
 };

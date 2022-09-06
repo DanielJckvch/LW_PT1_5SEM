@@ -4,6 +4,7 @@
 #include "Motorcycle.h"
 #include "Place.h"
 #include "Place.cpp"
+#define FIELDSIZE 10
 using namespace std;
 
 int main(void)
@@ -15,7 +16,7 @@ int main(void)
 	char* engCap;
 	vehicle* v1;
 	mark = model = engV = engCap = terrain = nullptr;
-	motorcycle* moto1;
+	motorcycle moto1;
 	garage<motorcycle> g1;
 	int mode = 0;
 	int num = 0;
@@ -28,7 +29,7 @@ int main(void)
 		{
 		case 1:
 			cout << "Mark:" << endl;
-			mark = new char[10];
+			mark = new char[FIELDSIZE];
 			cin >> mark;
 			/*
 			cout << "Model:" << endl;
@@ -43,7 +44,7 @@ int main(void)
 			cout << "Terrain:" << endl;
 			terrain = new char[10];
 			cin >> terrain;*/
-			moto1 = new motorcycle(mark, model, engV, engCap, terrain);
+			moto1.set(mark, model, engV, engCap, terrain);
 			g1.add(moto1);
 			break;
 		case 2:
@@ -60,6 +61,13 @@ int main(void)
 			v1 = g1.getEl(num);
 			v1->change();
 			break;
+		case 5:
+		{
+			garage<motorcycle> g2 = g1;
+			g2.show();
+			int a = 5;
+		}
+		break;
 		}
 	} while (mode != 0);
 	return 0;

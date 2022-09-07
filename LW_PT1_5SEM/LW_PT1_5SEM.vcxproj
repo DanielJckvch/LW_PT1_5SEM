@@ -139,16 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Garage.cpp" />
+    <ClCompile Include="Keeper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motorcycle.cpp" />
     <ClCompile Include="Place.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Garage.h" />
+    <ClInclude Include="Keeper.h" />
     <ClInclude Include="Motorcycle.h" />
     <ClInclude Include="Place.h" />
-    <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="Garage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

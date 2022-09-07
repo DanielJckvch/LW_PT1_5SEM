@@ -4,9 +4,9 @@
 #include <string.h>
 using namespace std;
 
-void motorcycle::show(void)
+void motorcycle::show(ostream& out)
 {
-	cout << "Mark:" << mark << endl;
+	out << "Mark:" << mark << endl;
 	/*cout << "Model:" << model << endl;
 	cout << "Engine size:" << engV << endl;
 	cout << "Engine capability:" << engCap<< endl;
@@ -15,19 +15,27 @@ void motorcycle::show(void)
 motorcycle::motorcycle(void)
 {//notuse
 	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
-	mark = model = engV = engCap = terrain = nullptr;
+	mark = model = engSize = engCap = terrain = nullptr;
 }
-motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engV(s3),engCap(s4),terrain(s5)
+motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engSize(s3),engCap(s4),terrain(s5)
 {
 	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
 }
-motorcycle::motorcycle(const motorcycle& ob)
+motorcycle::motorcycle(const motorcycle& toCopy)
 {
 	cout << "Calling the copy constructor in the \"Motorcycle\" class" << endl;
-	if (ob.mark)
+	if (toCopy.mark)
 	{
-		mark = new char[10];
-		strcpy(mark, ob.mark);
+		try
+		{
+			mark = new char[10];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
+		strcpy(mark, toCopy.mark);
 	}
 	else
 	{
@@ -70,12 +78,36 @@ motorcycle::motorcycle(const motorcycle& ob)
 		terrain = nullptr;
 	}*/
 }
+
+motorcycle* motorcycle::get(void)
+{
+	motorcycle* new_ob;
+	try
+	{
+		new_ob = new motorcycle(*this);
+	}
+	catch (bad_alloc)
+	{
+		cout << "Error of the operator \"new\"" << endl;
+		exit(-1);
+	}
+	
+	return new_ob;
+}
+
 void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 {
 	if (!mark)
 	{
-		mark = new char[10];
-		
+		try
+		{
+			mark = new char[10];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
 	}
 	strcpy(mark, s1);
 	/*
@@ -115,14 +147,39 @@ motorcycle::~motorcycle(void)
 }
 void motorcycle::change(void)
 {
-	int chanField;
-	cout << "Enter number of changing data about vehicle: 1-mark." << endl;
-	cin >> chanField;
-	switch (chanField)
+	int chanProp;
+	char buffErr[] = "Error of the input buffer";
+	cout << "Enter the number of vehicle property to change: 1-mark." << endl;
+	try
+	{
+		cin >> chanProp;
+		if (cin.bad() || cin.fail())
+		{
+			throw buffErr;
+		}
+	}
+	catch (char*)
+	{
+		exit(1);
+	}
+	
+	cout << endl;
+	switch (chanProp)
 	{
 	case 1:
-		cout << "Enter new mark: " << endl;
-		cin >> mark;
+		cout << "Enter a new mark: " << endl;
+		try
+		{
+			cin >> mark;
+			if (cin.bad() || cin.fail())
+			{
+				throw buffErr;
+			}
+		}
+		catch (char*)
+		{
+			exit(1);
+		}
 		break;
 	}
 }

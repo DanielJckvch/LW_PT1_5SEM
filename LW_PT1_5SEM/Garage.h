@@ -1,22 +1,15 @@
 #pragma once
-#include "Place.h"
-#include "Motorcycle.h"
-#include "Vehicle.h"
-template <typename v>
+#include <iostream>
+using namespace std;
 class garage
 {
-private:
-	place<v>* head;
-	place<v>* tail;
-	int amount;
 public:
-	void add(v ob);
-	void del(int num);
-	vehicle* getEl(int num);
-	void show(void);
-	garage();
-	garage(v* ob);
-	garage(const garage<v>& ob);
-	~garage();
-	garage operator++(int notused);
+	virtual void show(ostream& out) = 0;
+	virtual void change(void) = 0;
+	virtual garage* get(void) = 0;
+	virtual void set(char* s1, char* s2, char* s3, char* s4, char* s5) = 0;
+	virtual ~garage(void) 
+	{
+		cout << "Calling the destructor in the \"Garage\" class" << endl;
+	}
 };

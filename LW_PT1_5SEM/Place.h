@@ -1,14 +1,14 @@
 #pragma once
+#include "Garage.h"
 
-template <typename v>
 class place
 {
 public:
 	place* prev;
 	place* next;
-	v vehicle;
-	place(v ob);
+	garage* vehicle;
+	place(garage* veh);
 	place(void);
-	place(const place<v>& ob);
+	place(const place& toCopy);
 	~place();
 };

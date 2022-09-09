@@ -2,9 +2,10 @@
 #include "Keeper.h"
 #include "Motorcycle.h"
 #include "Place.h"
+#include "Garage.h"
 #define FIELDSIZE 10
 using namespace std;
-//Ôàéëû-609-àÿ ñòğ. ÍÀÏÈÑÀÒÜ ÇÀÄÀÍÈÅ
+//Ôàéëû-609-àÿ ñòğ. ÍÀÏÈÑÀÒÜ ÇÀÄÀÍÈÅ ÑÄÅËÀÒÜ ÒÈÒÓËÜÍÛÅ Ê ÎÒÓ È ÒÏĞ
 int main(void)
 {
 	
@@ -34,7 +35,7 @@ int main(void)
 	do
 	{
 		cout << endl;
-		cout << "Enter the processing mode: 0-exit, 1 - add motocycle, 2 - add automobile, 3 - add bus, 4 - change object, 5 - delete object, 6 - show all list." << endl;
+		cout << "Enter the processing mode: 0 - exit, 1 - add a motocycle, 2 - add an automobile, 3 - add a bus, 4 - change an object, 5 - delete an object, 6 - show all list, 7 - load data to a file, 8 - load data from a file." << endl;
 		try
 		{
 			cin >> mode;
@@ -53,7 +54,7 @@ int main(void)
 		case 1:
 			cout << "Enter a mark:" << endl;
 			try
-			{				
+			{
 				cin >> s1;
 				if (cin.bad() || cin.fail())
 				{
@@ -83,7 +84,7 @@ int main(void)
 				cout << "Error of the operator \"new\"" << endl;
 				exit(-1);
 			}
-			g_ptr->set(s1, s2, s4, s5, s3);	
+			g_ptr->set(s1, s2, s4, s5, s3);
 			cont1.add(g_ptr);
 			break;
 		case 2:
@@ -143,7 +144,7 @@ int main(void)
 			{
 				cout << "Element not found" << endl;
 			}
-			
+
 			break;
 		case 5:
 			cout << "Enter number of deleting position." << endl;
@@ -172,7 +173,7 @@ int main(void)
 			{
 				cout << "Element not found" << endl;
 			}
-			
+
 			/*
 			keeper g2 = cont1;
 			g2.show();
@@ -187,6 +188,20 @@ int main(void)
 			{
 				cout << "The list is empty" << endl;
 			}
+			break;
+
+		case 7:
+			try
+			{
+				cont1.loadToFile();
+			}
+			catch (int)
+			{
+				cout << "The list is empty" << endl;
+			}
+			break;
+		case 8:
+			cont1.loadFromFile();
 			break;
 		}
 	} while (mode != 0);

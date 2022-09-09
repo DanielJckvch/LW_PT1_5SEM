@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{99f0dda7-1687-44c4-aeb7-c6cdc1aaa483}</ProjectGuid>
+    <ProjectGuid>{34ee9100-180a-4355-ae97-7f4d0861d6bd}</ProjectGuid>
     <RootNamespace>LWPT15SEM</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -139,16 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Garage.h" />
+    <ClInclude Include="Keeper.h" />
+    <ClInclude Include="Motorcycle.h" />
+    <ClInclude Include="Place.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Garage.cpp" />
     <ClCompile Include="Keeper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motorcycle.cpp" />
     <ClCompile Include="Place.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Keeper.h" />
-    <ClInclude Include="Motorcycle.h" />
-    <ClInclude Include="Place.h" />
-    <ClInclude Include="Garage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

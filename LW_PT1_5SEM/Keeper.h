@@ -17,5 +17,8 @@ public:
 	keeper(garage* ob);
 	keeper(const keeper& ob);
 	~keeper();
+	void loadToFile(void);
+	void loadFromFile(void);
 	friend ostream& operator<<(ostream& stream, const keeper& cont);
+	
 };

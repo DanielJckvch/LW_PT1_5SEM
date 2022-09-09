@@ -13,17 +13,21 @@ void motorcycle::show(ostream& out)
 	cout << "Terrain:" << terrain<< endl;*/
 }
 motorcycle::motorcycle(void)
-{//notuse
+{
+	//notuse
 	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
 	mark = model = engSize = engCap = terrain = nullptr;
+	t = 'm';
 }
 motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engSize(s3),engCap(s4),terrain(s5)
 {
 	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
+	t = 'm';
 }
 motorcycle::motorcycle(const motorcycle& toCopy)
 {
 	cout << "Calling the copy constructor in the \"Motorcycle\" class" << endl;
+	t = 'm';
 	if (toCopy.mark)
 	{
 		try
@@ -94,7 +98,24 @@ motorcycle* motorcycle::get(void)
 	
 	return new_ob;
 }
-
+char* motorcycle::get(int propNum)
+{
+	switch (propNum)
+	{
+	case 0:
+		return &t;
+	case 1:
+		return mark;
+	case 2:
+		return model;
+	case 3:
+		return engSize;
+	case 4:
+		return engCap;
+	case 5:
+		return terrain;
+	}
+}
 void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 {
 	if (!mark)
@@ -162,7 +183,6 @@ void motorcycle::change(void)
 	{
 		exit(1);
 	}
-	
 	cout << endl;
 	switch (chanProp)
 	{

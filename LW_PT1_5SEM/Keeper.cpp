@@ -1,6 +1,9 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Keeper.h"
 #include "Garage.h"
+#define FIELDSIZE 10
 using namespace std;
 void keeper::add(garage* toInsert)
 {
@@ -165,4 +168,95 @@ ostream& operator<<(ostream& stream, const keeper& cont)
 		p = p->next;
 	}
 	return stream;
+}
+
+void keeper::loadToFile(void)
+{
+	
+	ofstream file("list.garage", ios::out || ios::trunc);
+	if (!file)
+	{
+		cout << "File opening error" << endl;
+		return;
+	}
+	place* p = tail->prev;
+	if (p == nullptr)
+	{
+		int er = 1;
+		throw er;
+		file.close();
+		return;
+	}
+	while (p != nullptr)
+	{
+		file.write(p->vehicle->get(0), 1);
+		for (int i = 1;i < 2;i++)
+		{
+			file.write(p->vehicle->get(i),10);
+
+		}
+		p = p->prev;
+	}
+	file.close();
+}
+
+void keeper::loadFromFile(void)
+{
+	ifstream file("list.garage");
+	if (!file)
+	{
+		cout << "File opening error" << endl;
+		return;
+	}
+	place* p = head;
+	while (p->next != nullptr)
+	{
+		p = p->next;
+		delete head;
+		head = p;
+	}
+	garage* g_ptr = nullptr;
+	char t;
+	char* s1;
+	char* s2;
+	char* s3;
+	char* s4;
+	char* s5;
+	try
+	{
+		s1 = new char[FIELDSIZE];
+		s2 = new char[FIELDSIZE];
+		s3 = new char[FIELDSIZE];
+		s4 = new char[FIELDSIZE];
+		s5 = new char[FIELDSIZE];
+	}
+	catch (bad_alloc)
+	{
+		cout << "Error of the operator \"new\"" << endl;
+		exit(-1);
+	}
+	while ((t = file.get()) != EOF)
+	{
+		//file.read(&t, 1);
+		switch (t)
+		{
+		case 'm':
+			g_ptr = new motorcycle;
+			break;
+		}
+		file.read(s1, FIELDSIZE);
+		/*
+		file.read(s2, FIELDSIZE);
+		file.read(s3, FIELDSIZE);
+		file.read(s4, FIELDSIZE);
+		file.read(s5, FIELDSIZE);*/
+		g_ptr->set(s1, s2, s4, s5, s3);
+		this->add(g_ptr);
+	}
+	file.close();
+	delete[] s1;
+	delete[] s2;
+	delete[] s3;
+	delete[] s4;
+	delete[] s5;
 }

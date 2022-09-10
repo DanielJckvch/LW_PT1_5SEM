@@ -2,15 +2,17 @@
 #include "Motorcycle.h"
 #include <iostream>
 #include <string.h>
+#define FIELDSIZE 15
 using namespace std;
 
 void motorcycle::show(ostream& out)
 {
 	out << "Mark:" << mark << endl;
-	/*cout << "Model:" << model << endl;
-	cout << "Engine size:" << engV << endl;
-	cout << "Engine capability:" << engCap<< endl;
-	cout << "Terrain:" << terrain<< endl;*/
+	out << "Model:" << model << endl;
+	out << "Engine size:" << engSize << endl;
+	out << "Engine capability:" << engCap<< endl;
+	out << "Terrain:" << terrain<< endl;
+	out << endl;
 }
 motorcycle::motorcycle(void)
 {
@@ -32,7 +34,7 @@ motorcycle::motorcycle(const motorcycle& toCopy)
 	{
 		try
 		{
-			mark = new char[10];
+			mark = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
@@ -45,42 +47,74 @@ motorcycle::motorcycle(const motorcycle& toCopy)
 	{
 		mark = nullptr;
 	}
-	/*if (ob.model)
+	if (toCopy.model)
 	{
-		model = new char[strlen(ob.model)];
-		strcpy(model, ob.model);
+		try
+		{
+			model = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
+		strcpy(model, toCopy.model);
 	}
 	else
 	{
 		model = nullptr;
 	}
-	if (ob.engV)
+	if (toCopy.engSize)
 	{
-		engV = new char[strlen(ob.engV)];
-		strcpy(engV, ob.engV);
+		try
+		{
+			engSize = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
+		strcpy(engSize, toCopy.engSize);
 	}
 	else
 	{
-		engV = nullptr;
+		engSize = nullptr;
 	}
-	if (ob.engCap)
+	if (toCopy.engCap)
 	{
-		engCap = new char[strlen(ob.engCap)];
-		strcpy(engCap, ob.engCap);
+		try
+		{
+			engCap = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
+		strcpy(engCap, toCopy.engCap);
 	}
 	else
 	{
 		engCap = nullptr;
 	}
-	if (ob.terrain)
+	if (toCopy.terrain)
 	{
-		terrain = new char[strlen(ob.terrain)];
-		strcpy(terrain, ob.terrain);
+		try
+		{
+			terrain = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
+		strcpy(terrain, toCopy.terrain);
 	}
 	else
 	{
 		terrain = nullptr;
-	}*/
+	}
 }
 
 motorcycle* motorcycle::get(void)
@@ -122,7 +156,7 @@ void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 	{
 		try
 		{
-			mark = new char[10];
+			mark = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
@@ -131,46 +165,77 @@ void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 		}
 	}
 	strcpy(mark, s1);
-	/*
 	if (!model)
 	{
-		model = new char[strlen(s2)];
+		try
+		{
+			model = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
 		
 	}
 	strcpy(model, s2);
-	if (!engV)
+	if (!engSize)
 	{
-		engV = new char[strlen(s3)];
+		try
+		{
+			engSize = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
 		
 	}
-	strcpy(engV, s3);
+	strcpy(engSize, s3);
 	if (!engCap)
 	{
-		engCap = new char[strlen(s4)];
+		try
+		{
+			engCap = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
 		
 	}
 	strcpy(engCap, s4);
 	if (!terrain)
 	{
-		terrain = new char[strlen(s5)];
+		try
+		{
+			terrain = new char[FIELDSIZE];
+		}
+		catch (bad_alloc)
+		{
+			cout << "Error of the operator \"new\"" << endl;
+			exit(-1);
+		}
 		
 	}
-	strcpy(terrain, s5);*/
+	strcpy(terrain, s5);
 }
 motorcycle::~motorcycle(void)
 {
 	cout << "Calling the destructor in the \"Motorcycle\" class" << endl;
 	delete[] mark;
-	//delete model;
-	//delete terrain;
-	//delete engV;
-	//delete engCap;
+	delete[] model;
+	delete[] terrain;
+	delete[] engSize;
+	delete[] engCap;
 }
 void motorcycle::change(void)
 {
 	int chanProp;
 	char buffErr[] = "Error of the input buffer";
-	cout << "Enter the number of vehicle property to change: 1-mark." << endl;
+	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - engine size, 4 - engine capability, 5 - terrain." << endl;
 	try
 	{
 		cin >> chanProp;
@@ -191,6 +256,66 @@ void motorcycle::change(void)
 		try
 		{
 			cin >> mark;
+			if (cin.bad() || cin.fail())
+			{
+				throw buffErr;
+			}
+		}
+		catch (char*)
+		{
+			exit(1);
+		}
+		break;
+	case 2:
+		cout << "Enter a new model: " << endl;
+		try
+		{
+			cin >> model;
+			if (cin.bad() || cin.fail())
+			{
+				throw buffErr;
+			}
+		}
+		catch (char*)
+		{
+			exit(1);
+		}
+		break;
+	case 3:
+		cout << "Enter a new engine size: " << endl;
+		try
+		{
+			cin >> engSize;
+			if (cin.bad() || cin.fail())
+			{
+				throw buffErr;
+			}
+		}
+		catch (char*)
+		{
+			exit(1);
+		}
+		break;
+	case 4:
+		cout << "Enter a new engine capability: " << endl;
+		try
+		{
+			cin >> engCap;
+			if (cin.bad() || cin.fail())
+			{
+				throw buffErr;
+			}
+		}
+		catch (char*)
+		{
+			exit(1);
+		}
+		break;
+	case 5:
+		cout << "Enter a new terrain for the motorcycle: " << endl;
+		try
+		{
+			cin >> terrain;
 			if (cin.bad() || cin.fail())
 			{
 				throw buffErr;

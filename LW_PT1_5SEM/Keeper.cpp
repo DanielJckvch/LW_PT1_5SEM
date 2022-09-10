@@ -3,7 +3,7 @@
 #include <string>
 #include "Keeper.h"
 #include "Garage.h"
-#define FIELDSIZE 10
+#define FIELDSIZE 15
 using namespace std;
 void keeper::add(garage* toInsert)
 {
@@ -64,15 +64,20 @@ void keeper::del(int num)
 }
 void keeper::changeEl(int num)
 {
-	place* p;
-	if (num > amount)
+	place* p = head;
+	if (p->next == nullptr)
 	{
 		int er = 1;
 		throw er;
 		return;
 	}
+	if (num > amount || num <= 0)
+	{
+		double er1 = 1.0;
+		throw er1;
+		return;
+	}
 	num--;
-	p = head;
 	while (num > 0)
 	{
 		p = p->next;
@@ -173,13 +178,14 @@ ostream& operator<<(ostream& stream, const keeper& cont)
 void keeper::loadToFile(void)
 {
 	
-	ofstream file("list.garage", ios::out || ios::trunc);
+	ofstream file("list.garage", ios::out | ios::binary | ios::trunc);
 	if (!file)
 	{
 		cout << "File opening error" << endl;
 		return;
 	}
 	place* p = tail->prev;
+	char* s;
 	if (p == nullptr)
 	{
 		int er = 1;
@@ -189,11 +195,12 @@ void keeper::loadToFile(void)
 	}
 	while (p != nullptr)
 	{
-		file.write(p->vehicle->get(0), 1);
-		for (int i = 1;i < 2;i++)
+		s = p->vehicle->get(0);
+		file.write(s, 1);
+		for (int i = 1;i < 6;i++)
 		{
-			file.write(p->vehicle->get(i),10);
-
+			s = p->vehicle->get(i);
+			file.write(s,FIELDSIZE);
 		}
 		p = p->prev;
 	}
@@ -202,7 +209,7 @@ void keeper::loadToFile(void)
 
 void keeper::loadFromFile(void)
 {
-	ifstream file("list.garage");
+	ifstream file("list.garage", ios::in | ios::binary);
 	if (!file)
 	{
 		cout << "File opening error" << endl;
@@ -237,7 +244,6 @@ void keeper::loadFromFile(void)
 	}
 	while ((t = file.get()) != EOF)
 	{
-		//file.read(&t, 1);
 		switch (t)
 		{
 		case 'm':
@@ -245,12 +251,11 @@ void keeper::loadFromFile(void)
 			break;
 		}
 		file.read(s1, FIELDSIZE);
-		/*
 		file.read(s2, FIELDSIZE);
 		file.read(s3, FIELDSIZE);
 		file.read(s4, FIELDSIZE);
-		file.read(s5, FIELDSIZE);*/
-		g_ptr->set(s1, s2, s4, s5, s3);
+		file.read(s5, FIELDSIZE);
+		g_ptr->set(s1, s2, s3, s4, s5);
 		this->add(g_ptr);
 	}
 	file.close();

@@ -3,9 +3,10 @@
 #include "Motorcycle.h"
 #include "Place.h"
 #include "Garage.h"
-#define FIELDSIZE 10
+#define FIELDSIZE 15
 using namespace std;
-//Ôàéëû-609-àÿ ñòğ. ÍÀÏÈÑÀÒÜ ÇÀÄÀÍÈÅ ÑÄÅËÀÒÜ ÒÈÒÓËÜÍÛÅ Ê ÎÒÓ È ÒÏĞ
+//Ôàéëû-609-àÿ ñòğ. ÍÀÏÈÑÀÒÜ ÇÀÄÀÍÈÅ ÇÄÅÑÜ, ÑÄÅËÀÒÜ ÒÈÒÓËÜÍÛÅ Ê ÎÒÓ È ÒÏĞ
+//ÏĞÎÂÅĞÈÒÜ ÍÀËÈ×ÈÅ ÄĞÓÃÈÕ ÁÀÃÎÂ, ÄÎÁÀÂÈÒÜ ÒÈÏÛ "ÀÂÒÎÌÎÁÈËÜ" È "ÀÂÒÎÁÓÑ", ÏÎÄÑÒĞÎÈÒÜ ÏÎÄ ÄÎÏ ÒĞÅÁÎÂÀÍÈß
 int main(void)
 {
 	
@@ -66,15 +67,61 @@ int main(void)
 				exit(1);
 			}
 			cout << endl;
-			/*
-			cout << "Model:" << endl;
-			cin >> model;
-			cout << "Engine size:" << endl;
-			cin >> engV;
-			cout << "Engine capability:" << endl;
-			cin >> engCap;
-			cout << "Terrain:" << endl;
-			cin >> terrain;*/
+			cout << "Enter a model:" << endl;
+			try
+			{
+				cin >> s2;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a engine size:" << endl;
+			try
+			{
+				cin >> s3;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a engine capability:" << endl;
+			try
+			{
+				cin >> s4;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a terrain:" << endl;
+			try
+			{
+				cin >> s5;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
 			try
 			{
 				g_ptr = new motorcycle;
@@ -84,45 +131,175 @@ int main(void)
 				cout << "Error of the operator \"new\"" << endl;
 				exit(-1);
 			}
-			g_ptr->set(s1, s2, s4, s5, s3);
+			g_ptr->set(s1, s2, s3, s4, s5);
 			cont1.add(g_ptr);
 			break;
 		case 2:
 			cout << "Enter a mark:" << endl;
-			cin >> s1;
+			try
+			{
+				cin >> s1;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
 			cout << endl;
-			/*
-			cout << "Model:" << endl;
-			cin >> model;
-			cout << "Engine size:" << endl;
-			cin >> engV;
-			cout << "Engine capability:" << endl;
-			cin >> engCap;
-			cout << "Terrain:" << endl;
-			cin >> terrain;*/
-			g_ptr = new motorcycle;
-			g_ptr->set(s1, s2, s4, s5, s3);
+			cout << "Enter a model:" << endl;
+			try
+			{
+				cin >> s2;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a engine size:" << endl;
+			try
+			{
+				cin >> s3;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a colour:" << endl;
+			try
+			{
+				cin >> s4;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a gearbox:" << endl;
+			try
+			{
+				cin >> s5;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			try
+			{
+				g_ptr = new motorcycle;
+			}
+			catch (bad_alloc)
+			{
+				cout << "Error of the operator \"new\"" << endl;
+				exit(-1);
+			}
+			g_ptr->set(s1, s2, s3, s4, s5);
 			cont1.add(g_ptr);
 			break;
 		case 3:
 			cout << "Enter a mark:" << endl;
-			cin >> s1;
+			try
+			{
+				cin >> s1;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
 			cout << endl;
-			/*
-			cout << "Model:" << endl;
-			cin >> model;
-			cout << "Engine size:" << endl;
-			cin >> engV;
-			cout << "Engine capability:" << endl;
-			cin >> engCap;
-			cout << "Terrain:" << endl;
-			cin >> terrain;*/
-			g_ptr = new motorcycle;
-			g_ptr->set(s1, s2, s4, s5, s3);
+			cout << "Enter a model:" << endl;
+			try
+			{
+				cin >> s2;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a total number of passenger seats:" << endl;
+			try
+			{
+				cin >> s3;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a number of seats:" << endl;
+			try
+			{
+				cin >> s4;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cout << endl;
+			cout << "Enter a terminal point:" << endl;
+			try
+			{
+				cin >> s5;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			try
+			{
+				g_ptr = new motorcycle;
+			}
+			catch (bad_alloc)
+			{
+				cout << "Error of the operator \"new\"" << endl;
+				exit(-1);
+			}
+			g_ptr->set(s1, s2, s3, s4, s5);
 			cont1.add(g_ptr);
 			break;
 		case 4:
-			cout << "Enter the number of the processed element." << endl;
+			cout << "Enter the number of the processed element." << endl;//Íàäî âñòàâëÿòü â keeper::changeEl ïî ëîãèêå?
 			try
 			{
 				cin >> num;
@@ -142,9 +319,12 @@ int main(void)
 			}
 			catch (int)
 			{
+				cout << "The list is empty" << endl;
+			}
+			catch (double)
+			{
 				cout << "Element not found" << endl;
 			}
-
 			break;
 		case 5:
 			cout << "Enter number of deleting position." << endl;

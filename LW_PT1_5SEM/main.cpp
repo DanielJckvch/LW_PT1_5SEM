@@ -1,20 +1,26 @@
 #include <iostream>
 #include "Keeper.h"
 #include "Motorcycle.h"
+#include "Automobile.h"
+#include "Bus.h"
 #include "Place.h"
 #include "Garage.h"
 #define FIELDSIZE 15
 using namespace std;
 //Файлы-609-ая стр. НАПИСАТЬ ЗАДАНИЕ ЗДЕСЬ, СДЕЛАТЬ ТИТУЛЬНЫЕ К ОТУ И ТПР
-//ПРОВЕРИТЬ НАЛИЧИЕ ДРУГИХ БАГОВ, ДОБАВИТЬ ТИПЫ "АВТОМОБИЛЬ" И "АВТОБУС", ПОДСТРОИТЬ ПОД ДОП ТРЕБОВАНИЯ
+//ПРОВЕРИТЬ НАЛИЧИЕ ДРУГИХ БАГОВ, ПОДСТРОИТЬ ПОД ДОП ТРЕБОВАНИЯ
+//Доп. фичи: текстовые файлы, вставка с конца и в опред место, копирование эл-та, поиск эл-тов по ключ словам, очистка всего, пароль
+//Исправить: реверсное задание списка, 
+//В ФОРМАЛИЗАЦИИ ЗАПИСАТЬ ФОРМАТ
 int main(void)
 {
-	
+
 	char* s1;
 	char* s2;
 	char* s3;
 	char* s4;
 	char* s5;
+	char* filename;
 	try
 	{
 		s1 = new char[FIELDSIZE];
@@ -22,6 +28,7 @@ int main(void)
 		s3 = new char[FIELDSIZE];
 		s4 = new char[FIELDSIZE];
 		s5 = new char[FIELDSIZE];
+		filename = new char[50];
 	}
 	catch (bad_alloc)
 	{
@@ -191,7 +198,7 @@ int main(void)
 				exit(1);
 			}
 			cout << endl;
-			cout << "Enter a gearbox:" << endl;
+			cout << "Enter a transmission type:" << endl;
 			try
 			{
 				cin >> s5;
@@ -206,7 +213,7 @@ int main(void)
 			}
 			try
 			{
-				g_ptr = new motorcycle;
+				g_ptr = new automobile;
 			}
 			catch (bad_alloc)
 			{
@@ -245,7 +252,7 @@ int main(void)
 				exit(1);
 			}
 			cout << endl;
-			cout << "Enter a total number of passenger seats:" << endl;
+			cout << "Enter a total number of passengers:" << endl;
 			try
 			{
 				cin >> s3;
@@ -288,7 +295,7 @@ int main(void)
 			}
 			try
 			{
-				g_ptr = new motorcycle;
+				g_ptr = new bus;
 			}
 			catch (bad_alloc)
 			{
@@ -371,9 +378,23 @@ int main(void)
 			break;
 
 		case 7:
+			cout << "Enter a file name or path with name:" << endl;
 			try
 			{
-				cont1.loadToFile();
+				cin >> filename;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			try
+			{
+				//garage.txt
+				cont1.loadToFile(filename);
 			}
 			catch (int)
 			{
@@ -381,7 +402,20 @@ int main(void)
 			}
 			break;
 		case 8:
-			cont1.loadFromFile();
+			cout << "Enter a file name or path with name:" << endl;
+			try
+			{
+				cin >> filename;
+				if (cin.bad() || cin.fail())
+				{
+					throw buffErr;
+				}
+			}
+			catch (char*)
+			{
+				exit(1);
+			}
+			cont1.loadFromFile(filename);
 			break;
 		}
 	} while (mode != 0);
@@ -390,5 +424,6 @@ int main(void)
 	delete[] s3;
 	delete[] s4;
 	delete[] s5;
+	delete[] filename;
 	return 0;
 }

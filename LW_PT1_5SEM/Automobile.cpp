@@ -1,36 +1,36 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Motorcycle.h"
+#include "Automobile.h"
 #include <iostream>
 #include <string.h>
 #define FIELDSIZE 15
 using namespace std;
 
-void motorcycle::show(ostream& out)
+void automobile::show(ostream& out)
 {
-	out << "Motorcycle" << endl;
+	out << "Automobile" << endl;
 	out << "Mark:" << mark << endl;
 	out << "Model:" << model << endl;
 	out << "Engine size:" << engSize << endl;
-	out << "Engine capability:" << engCap<< endl;
-	out << "Terrain:" << terrain<< endl;
+	out << "Colour:" << colour << endl;
+	out << "Transmission type:" << transmission << endl;
 	out << endl;
 }
-motorcycle::motorcycle(void)
+automobile::automobile(void)
 {
 	//notuse
-	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
-	mark = model = engSize = engCap = terrain = nullptr;
-	t = 'm';
+	cout << "Calling the constructor in the \"Automobile\" class" << endl;
+	mark = model = engSize = colour = transmission = nullptr;
+	t = 'a';
 }
-motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engSize(s3),engCap(s4),terrain(s5)
+automobile::automobile(char* s1, char* s2, char* s3, char* s4, char* s5) :mark(s1), model(s2), engSize(s3), colour(s4), transmission(s5)
 {
-	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
-	t = 'm';
+	cout << "Calling the constructor in the \"Automobile\" class" << endl;
+	t = 'a';
 }
-motorcycle::motorcycle(const motorcycle& toCopy)
+automobile::automobile(const automobile& toCopy)
 {
-	cout << "Calling the copy constructor in the \"Motorcycle\" class" << endl;
-	t = 'm';
+	cout << "Calling the copy constructor in the \"Automobile\" class" << endl;
+	t = 'a';
 	if (toCopy.mark)
 	{
 		try
@@ -82,58 +82,58 @@ motorcycle::motorcycle(const motorcycle& toCopy)
 	{
 		engSize = nullptr;
 	}
-	if (toCopy.engCap)
+	if (toCopy.colour)
 	{
 		try
 		{
-			engCap = new char[FIELDSIZE];
+			colour = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		strcpy(engCap, toCopy.engCap);
+		strcpy(colour, toCopy.colour);
 	}
 	else
 	{
-		engCap = nullptr;
+		colour = nullptr;
 	}
-	if (toCopy.terrain)
+	if (toCopy.transmission)
 	{
 		try
 		{
-			terrain = new char[FIELDSIZE];
+			transmission = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		strcpy(terrain, toCopy.terrain);
+		strcpy(transmission, toCopy.transmission);
 	}
 	else
 	{
-		terrain = nullptr;
+		transmission = nullptr;
 	}
 }
 
-motorcycle* motorcycle::get(void)
+automobile* automobile::get(void)
 {
-	motorcycle* new_ob;
+	automobile* new_ob;
 	try
 	{
-		new_ob = new motorcycle(*this);
+		new_ob = new automobile(*this);
 	}
 	catch (bad_alloc)
 	{
 		cout << "Error of the operator \"new\"" << endl;
 		exit(-1);
 	}
-	
+
 	return new_ob;
 }
-char* motorcycle::get(int propNum)
+char* automobile::get(int propNum)
 {
 	switch (propNum)
 	{
@@ -146,12 +146,12 @@ char* motorcycle::get(int propNum)
 	case 3:
 		return engSize;
 	case 4:
-		return engCap;
+		return colour;
 	case 5:
-		return terrain;
+		return transmission;
 	}
 }
-void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
+void automobile::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 {
 	if (!mark)
 	{
@@ -177,7 +177,7 @@ void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
 	strcpy(model, s2);
 	if (!engSize)
@@ -191,52 +191,52 @@ void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
 	strcpy(engSize, s3);
-	if (!engCap)
+	if (!colour)
 	{
 		try
 		{
-			engCap = new char[FIELDSIZE];
+			colour = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
-	strcpy(engCap, s4);
-	if (!terrain)
+	strcpy(colour, s4);
+	if (!transmission)
 	{
 		try
 		{
-			terrain = new char[FIELDSIZE];
+			transmission = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
-	strcpy(terrain, s5);
+	strcpy(transmission, s5);
 }
-motorcycle::~motorcycle(void)
+automobile::~automobile(void)
 {
-	cout << "Calling the destructor in the \"Motorcycle\" class" << endl;
+	cout << "Calling the destructor in the \"Automobile\" class" << endl;
 	delete[] mark;
 	delete[] model;
-	delete[] terrain;
+	delete[] transmission;
 	delete[] engSize;
-	delete[] engCap;
+	delete[] colour;
 }
-void motorcycle::change(void)
+void automobile::change(void)
 {
 	int chanProp;
 	char buffErr[] = "Error of the input buffer";
-	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - engine size, 4 - engine capability, 5 - terrain." << endl;
+	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - engine size, 4 - colour, 5 - transmission type." << endl;
 	try
 	{
 		cin >> chanProp;
@@ -298,10 +298,10 @@ void motorcycle::change(void)
 		}
 		break;
 	case 4:
-		cout << "Enter a new engine capability: " << endl;
+		cout << "Enter a new colour: " << endl;
 		try
 		{
-			cin >> engCap;
+			cin >> colour;
 			if (cin.bad() || cin.fail())
 			{
 				throw buffErr;
@@ -313,10 +313,10 @@ void motorcycle::change(void)
 		}
 		break;
 	case 5:
-		cout << "Enter a new terrain for the motorcycle: " << endl;
+		cout << "Enter a new transmission type: " << endl;
 		try
 		{
-			cin >> terrain;
+			cin >> transmission;
 			if (cin.bad() || cin.fail())
 			{
 				throw buffErr;
@@ -329,4 +329,3 @@ void motorcycle::change(void)
 		break;
 	}
 }
-

@@ -139,12 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Automobile.h" />
+    <ClInclude Include="Bus.h" />
     <ClInclude Include="Garage.h" />
     <ClInclude Include="Keeper.h" />
     <ClInclude Include="Motorcycle.h" />
     <ClInclude Include="Place.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Automobile.cpp" />
+    <ClCompile Include="Bus.cpp" />
     <ClCompile Include="Garage.cpp" />
     <ClCompile Include="Keeper.cpp" />
     <ClCompile Include="main.cpp" />

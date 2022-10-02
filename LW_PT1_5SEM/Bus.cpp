@@ -1,36 +1,36 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Motorcycle.h"
+#include "Bus.h"
 #include <iostream>
 #include <string.h>
 #define FIELDSIZE 15
 using namespace std;
 
-void motorcycle::show(ostream& out)
+void bus::show(ostream& out)
 {
-	out << "Motorcycle" << endl;
+	out << "Bus"<< endl;
 	out << "Mark:" << mark << endl;
 	out << "Model:" << model << endl;
-	out << "Engine size:" << engSize << endl;
-	out << "Engine capability:" << engCap<< endl;
-	out << "Terrain:" << terrain<< endl;
+	out << "Total number of passengers:" << passengerNum << endl;
+	out << "Number of seats:" << seatsNum << endl;
+	out << "Terminal point:" << terminal << endl;
 	out << endl;
 }
-motorcycle::motorcycle(void)
+bus::bus(void)
 {
 	//notuse
-	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
-	mark = model = engSize = engCap = terrain = nullptr;
-	t = 'm';
+	cout << "Calling the constructor in the \"Bus\" class" << endl;
+	mark = model = passengerNum = seatsNum = terminal = nullptr;
+	t = 'b';
 }
-motorcycle::motorcycle(char* s1, char* s2, char* s3, char* s4, char* s5):mark(s1),model(s2),engSize(s3),engCap(s4),terrain(s5)
+bus::bus(char* s1, char* s2, char* s3, char* s4, char* s5) :mark(s1), model(s2), passengerNum(s3), seatsNum(s4), terminal(s5)
 {
-	cout << "Calling the constructor in the \"Motorcycle\" class" << endl;
-	t = 'm';
+	cout << "Calling the constructor in the \"Bus\" class" << endl;
+	t = 'b';
 }
-motorcycle::motorcycle(const motorcycle& toCopy)
+bus::bus(const bus& toCopy)
 {
-	cout << "Calling the copy constructor in the \"Motorcycle\" class" << endl;
-	t = 'm';
+	cout << "Calling the copy constructor in the \"Bus\" class" << endl;
+	t = 'b';
 	if (toCopy.mark)
 	{
 		try
@@ -65,75 +65,74 @@ motorcycle::motorcycle(const motorcycle& toCopy)
 	{
 		model = nullptr;
 	}
-	if (toCopy.engSize)
+	if (toCopy.passengerNum)
 	{
 		try
 		{
-			engSize = new char[FIELDSIZE];
+			passengerNum = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		strcpy(engSize, toCopy.engSize);
+		strcpy(passengerNum, toCopy.passengerNum);
 	}
 	else
 	{
-		engSize = nullptr;
+		passengerNum = nullptr;
 	}
-	if (toCopy.engCap)
+	if (toCopy.seatsNum)
 	{
 		try
 		{
-			engCap = new char[FIELDSIZE];
+			seatsNum = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		strcpy(engCap, toCopy.engCap);
+		strcpy(seatsNum, toCopy.seatsNum);
 	}
 	else
 	{
-		engCap = nullptr;
+		seatsNum = nullptr;
 	}
-	if (toCopy.terrain)
+	if (toCopy.terminal)
 	{
 		try
 		{
-			terrain = new char[FIELDSIZE];
+			terminal = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		strcpy(terrain, toCopy.terrain);
+		strcpy(terminal, toCopy.terminal);
 	}
 	else
 	{
-		terrain = nullptr;
+		terminal = nullptr;
 	}
 }
-
-motorcycle* motorcycle::get(void)
+bus* bus::get(void)
 {
-	motorcycle* new_ob;
+	bus* new_ob;
 	try
 	{
-		new_ob = new motorcycle(*this);
+		new_ob = new bus(*this);
 	}
 	catch (bad_alloc)
 	{
 		cout << "Error of the operator \"new\"" << endl;
 		exit(-1);
 	}
-	
+
 	return new_ob;
 }
-char* motorcycle::get(int propNum)
+char* bus::get(int propNum)
 {
 	switch (propNum)
 	{
@@ -144,14 +143,14 @@ char* motorcycle::get(int propNum)
 	case 2:
 		return model;
 	case 3:
-		return engSize;
+		return passengerNum;
 	case 4:
-		return engCap;
+		return seatsNum;
 	case 5:
-		return terrain;
+		return terminal;
 	}
 }
-void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
+void bus::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 {
 	if (!mark)
 	{
@@ -177,66 +176,66 @@ void motorcycle::set(char* s1, char* s2, char* s3, char* s4, char* s5)
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
 	strcpy(model, s2);
-	if (!engSize)
+	if (!passengerNum)
 	{
 		try
 		{
-			engSize = new char[FIELDSIZE];
+			passengerNum = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
-	strcpy(engSize, s3);
-	if (!engCap)
+	strcpy(passengerNum, s3);
+	if (!seatsNum)
 	{
 		try
 		{
-			engCap = new char[FIELDSIZE];
+			seatsNum = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
-	strcpy(engCap, s4);
-	if (!terrain)
+	strcpy(seatsNum, s4);
+	if (!terminal)
 	{
 		try
 		{
-			terrain = new char[FIELDSIZE];
+			terminal = new char[FIELDSIZE];
 		}
 		catch (bad_alloc)
 		{
 			cout << "Error of the operator \"new\"" << endl;
 			exit(-1);
 		}
-		
+
 	}
-	strcpy(terrain, s5);
+	strcpy(terminal, s5);
 }
-motorcycle::~motorcycle(void)
+bus::~bus(void)
 {
-	cout << "Calling the destructor in the \"Motorcycle\" class" << endl;
+	cout << "Calling the destructor in the \"Bus\" class" << endl;
 	delete[] mark;
 	delete[] model;
-	delete[] terrain;
-	delete[] engSize;
-	delete[] engCap;
+	delete[] terminal;
+	delete[] passengerNum;
+	delete[] seatsNum;
 }
-void motorcycle::change(void)
+void bus::change(void)
 {
 	int chanProp;
 	char buffErr[] = "Error of the input buffer";
-	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - engine size, 4 - engine capability, 5 - terrain." << endl;
+	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - total number of passengers, 4 - number of seats, 5 - terminal point" << endl;
 	try
 	{
 		cin >> chanProp;
@@ -283,10 +282,10 @@ void motorcycle::change(void)
 		}
 		break;
 	case 3:
-		cout << "Enter a new engine size: " << endl;
+		cout << "Enter a new total number of passengers: " << endl;
 		try
 		{
-			cin >> engSize;
+			cin >> passengerNum;
 			if (cin.bad() || cin.fail())
 			{
 				throw buffErr;
@@ -298,10 +297,10 @@ void motorcycle::change(void)
 		}
 		break;
 	case 4:
-		cout << "Enter a new engine capability: " << endl;
+		cout << "Enter a new number of seats: " << endl;
 		try
 		{
-			cin >> engCap;
+			cin >> seatsNum;
 			if (cin.bad() || cin.fail())
 			{
 				throw buffErr;
@@ -313,10 +312,10 @@ void motorcycle::change(void)
 		}
 		break;
 	case 5:
-		cout << "Enter a new terrain for the motorcycle: " << endl;
+		cout << "Enter a new terminal point: " << endl;
 		try
 		{
-			cin >> terrain;
+			cin >> terminal;
 			if (cin.bad() || cin.fail())
 			{
 				throw buffErr;
@@ -329,4 +328,3 @@ void motorcycle::change(void)
 		break;
 	}
 }
-

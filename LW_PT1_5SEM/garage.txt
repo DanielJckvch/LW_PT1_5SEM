@@ -1,0 +1,31 @@
+The list of vehicles.
+
+
+Automobile
+Mark:Kopeyka
+Model:1
+Engine size:1000
+Colour:white
+Transmission type:Manual
+
+Bus
+Mark:PAZ
+Model:1500
+Total number of passengers:50
+Number of seats:40
+Terminal point:Koltsevaya
+
+Motorcycle
+Mark:Toyota
+Model:DS-3760
+Engine size:1000
+Engine capability:180
+Terrain:City
+
+Bus
+Mark:Mercedes
+Model:RD-5700
+Total number of passengers:70
+Number of seats:40
+Terminal point:pl.Lenina
+

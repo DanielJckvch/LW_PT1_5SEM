@@ -236,6 +236,15 @@ void motorcycle::change(void)
 {
 	int chanProp;
 	char buffErr[] = "Error of the input buffer";
+	cout << "Original data: " << endl;
+	cout << endl;
+	cout << "Motorcycle" << endl;
+	cout << "Mark:" << mark << endl;
+	cout << "Model:" << model << endl;
+	cout << "Engine size:" << engSize << endl;
+	cout << "Engine capability:" << engCap << endl;
+	cout << "Terrain:" << terrain << endl;
+	cout << endl;
 	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - engine size, 4 - engine capability, 5 - terrain." << endl;
 	try
 	{

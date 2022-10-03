@@ -236,6 +236,15 @@ void automobile::change(void)
 {
 	int chanProp;
 	char buffErr[] = "Error of the input buffer";
+	cout << "Original data: " << endl;
+	cout << endl;
+	cout << "Automobile" << endl;
+	cout << "Mark:" << mark << endl;
+	cout << "Model:" << model << endl;
+	cout << "Engine size:" << engSize << endl;
+	cout << "Colour:" << colour << endl;
+	cout << "Transmission type:" << transmission << endl;
+	cout << endl;
 	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - engine size, 4 - colour, 5 - transmission type." << endl;
 	try
 	{

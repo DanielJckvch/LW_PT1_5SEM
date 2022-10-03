@@ -12,10 +12,14 @@ private:
 	int amount;
 public:
 	void add(garage* toInsert);
+	void addToEnd(garage* toInsert);
+	void insert(int pos, garage* toInsert);
+	void copy(int sou, int dest);
 	void del(int num);
 	void changeEl(int num);
 	void show(void);
-	//void clear(void);
+	void search(char* s);
+	void clear(void);
 	keeper();
 	keeper(garage* ob);
 	keeper(const keeper& ob);

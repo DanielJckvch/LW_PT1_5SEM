@@ -24,6 +24,83 @@ void keeper::add(garage* toInsert)
 	head = new_place;
 	amount++;
 }
+void keeper::addToEnd(garage* toInsert)
+{
+	place* new_place;
+	try
+	{
+		new_place = new place(toInsert);
+	}
+	catch (bad_alloc)
+	{
+		cout << "Error of the operator \"new\"" << endl;
+		exit(-1);
+	}
+	new_place->prev = tail->prev;
+	new_place->next = tail;
+	tail->prev = new_place;
+	if (new_place->prev)
+	{
+		new_place->prev->next = new_place;
+	}
+	else
+	{
+		head = new_place;
+	}
+	amount++;
+}
+void keeper::insert(int pos, garage* toInsert)
+{
+	place* new_place;
+	place* p = head;
+	if (pos <= 1)
+	{
+		this->add(toInsert);
+		return;
+	}
+	if (pos > amount)
+	{
+		this->addToEnd(toInsert);
+		return;
+	}
+	try
+	{
+		new_place = new place(toInsert);
+	}
+	catch (bad_alloc)
+	{
+		cout << "Error of the operator \"new\"" << endl;
+		exit(-1);
+	}
+	pos-=2;
+	while (pos--)
+	{
+		p = p->next;
+	}
+	new_place->next = p->next;
+	new_place->prev = p;
+	p->next->prev = new_place;
+	p->next = new_place;
+	amount++;
+	
+}
+void keeper::copy(int sou, int dest)
+{
+	if (sou <= 0 || sou > amount)
+	{
+		int er = 1;
+		throw er;
+		return;
+	}
+	place* p = head;
+	sou--;
+	while (sou)
+	{
+		p = p->next;
+		sou = sou - 1;
+	}
+	this->insert(dest, p->vehicle->get());
+}
 void keeper::del(int num)
 {
 	place* p = head;
@@ -53,14 +130,7 @@ void keeper::del(int num)
 	{
 		head = head->next;
 	}
-	if (p->next)
-	{
-		p->next->prev = p->prev;
-	}
-	else
-	{
-		tail = tail->prev;
-	}
+	p->next->prev = p->prev;
 	delete p;
 	amount--;
 }
@@ -95,6 +165,45 @@ void keeper::show(void)
 		p->vehicle->show(cout);
 		p = p->next;
 	}
+}
+void keeper::search(char* s)
+{
+	place* p = head;
+	int f = 0;
+	if (!amount)
+	{
+		int er = 1;
+		throw er;
+	}
+	while (p->next)
+	{
+		for (int i = 1;i <= 5;i++)
+		{
+			if (!strcmp(p->vehicle->get(i), s))
+			{
+				f = 1;
+				p->vehicle->show(cout);
+				break;
+			}
+		}
+		p = p->next;
+	}
+	if (!f)
+	{
+		cout << "Nothing found" << endl;
+	}
+}
+void keeper::clear(void)
+{
+	place* p = head;
+	while (amount)
+	{
+		p = head;
+		head = head->next;
+		delete p;
+		amount = amount - 1;
+	}
+	head->prev = nullptr;
 }
 keeper::keeper()
 {
@@ -494,7 +603,7 @@ void keeper::loadFromFile(char* name)
 				t = 0;
 				strcpy(fields[4], pos);
 				g_ptr->set(fields[0], fields[1], fields[2], fields[3], fields[4]);
-				this->add(g_ptr);
+				this->addToEnd(g_ptr);
 				g_ptr = nullptr;
 				for (int i = 0;i < 5;i++)
 				{
@@ -536,7 +645,7 @@ void keeper::loadFromFile(char* name)
 				t = 0;
 				strcpy(fields[4], pos);
 				g_ptr->set(fields[0], fields[1], fields[2], fields[3], fields[4]);
-				this->add(g_ptr);
+				this->addToEnd(g_ptr);
 				g_ptr = nullptr;
 				for (int i = 0;i < 5;i++)
 				{
@@ -595,7 +704,7 @@ void keeper::loadFromFile(char* name)
 				t = 0;
 				strcpy(fields[4], pos);
 				g_ptr->set(fields[0], fields[1], fields[2], fields[3], fields[4]);
-				this->add(g_ptr);
+				this->addToEnd(g_ptr);
 				g_ptr = nullptr;
 				for (int i = 0;i < 5;i++)
 				{

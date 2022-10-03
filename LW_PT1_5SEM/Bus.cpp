@@ -235,6 +235,15 @@ void bus::change(void)
 {
 	int chanProp;
 	char buffErr[] = "Error of the input buffer";
+	cout << "Original data: " << endl;
+	cout << endl;
+	cout << "Bus" << endl;
+	cout << "Mark:" << mark << endl;
+	cout << "Model:" << model << endl;
+	cout << "Total number of passengers:" << passengerNum << endl;
+	cout << "Number of seats:" << seatsNum << endl;
+	cout << "Terminal point:" << terminal << endl;
+	cout << endl;
 	cout << "Enter the number of vehicle property to change: 1 - mark, 2 - model, 3 - total number of passengers, 4 - number of seats, 5 - terminal point" << endl;
 	try
 	{

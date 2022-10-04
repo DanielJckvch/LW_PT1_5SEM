@@ -12,8 +12,6 @@ Automobile
 Mark:Peugeot
 Model:XV-821
 Engine size:1200
-Colour:Black
-Transmission type:Auto
 
 Bus
 Mark:Mercedes
